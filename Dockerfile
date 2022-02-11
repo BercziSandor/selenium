@@ -6,10 +6,13 @@ WORKDIR /app
 RUN mkdir __logger
 
 # install google chrome
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN apt-key add tmp/linux_signing_key.pub
 RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 RUN apt-get -y update
 RUN apt-get install -y google-chrome-stable
+# RUN dpkg -i tmp/google-chrome-stable_current_amd64.deb
+
 
 # install chromedriver
 RUN apt-get install -yqq unzip
